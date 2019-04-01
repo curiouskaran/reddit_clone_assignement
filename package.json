@@ -1,0 +1,25 @@
+{
+  "name": "reddit_clone_assignment",
+  "version": "1.0.0",
+  "author": "Karan Sharma",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "^3.0.2",
+    "express": "^4.16.4",
+    "isomorphic-unfetch": "^3.0.0",
+    "jss": "latest",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-jss": "^8.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "next start -p %PORT%"
+  }
+}
