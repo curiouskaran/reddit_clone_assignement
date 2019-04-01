@@ -3,9 +3,10 @@ Author:-Karan Sharma
 node and npm.
 ############# How to run ###############
 step1:- git clone https://github.com/curiouskaran/reddit_clone_assignement.git
-step2:- npm install
-step3:- npm run dev
-step4:- go to chrome and open http://localhost:3000
+step2:- cd .\reddit_clone_assignement\
+step3:- npm install
+step4:- npm run dev
+step5:- go to chrome and open http://localhost:3000
 
 ############# How to test ##############
 -->On the landing page, when you click on Title or subreddit name it will navigate to the subreddit.
