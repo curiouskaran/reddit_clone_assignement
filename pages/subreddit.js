@@ -14,7 +14,7 @@ class SubredditPage extends Component {
 
   static defaultProps = {
     subreddit: "",
-    posts: []
+    posts: {}
   };
 
   static getInitialProps({ reduxStore, query }) {
