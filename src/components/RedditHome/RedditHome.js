@@ -24,6 +24,7 @@ const redditHome = ({ classes, posts }) => (
           <HomeCard
             post={post}
             index={index}
+            key={post.id}
           />
         ))}
       </Grid>

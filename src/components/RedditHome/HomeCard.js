@@ -33,7 +33,7 @@ const styles = theme => ({
 });
 
 const homeCard = ({ post, classes, index }) => (
-  <Grid item key={post.id} xs={12} md={8}>
+  <Grid item xs={12} md={8}>
     <Card className={classes.card}>
       <CardHeader
         avatar={

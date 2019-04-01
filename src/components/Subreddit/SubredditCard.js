@@ -48,9 +48,9 @@ const styles = theme => ({
 
 const subredditCard = ({ classes, post }) => {
   return (
-    <main key={post.id}>
+    <main>
       {Object.keys(post).length && post.selftext === "" && (
-        <Card className={classes.card}>
+        <Card className={classes.card} >
           <CardHeader
             avatar={
               <Avatar aria-label="user-avatar" className={classes.avatar}>
