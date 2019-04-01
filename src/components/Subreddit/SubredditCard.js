@@ -47,20 +47,19 @@ const styles = theme => ({
 });
 
 const subredditCard = ({ classes, post }) => {
-  // console.log("post", post);
   return (
-    <main key={post.data.id}>
-      {Object.keys(post).length && post.data.selftext === "" && (
+    <main key={post.id}>
+      {Object.keys(post).length && post.selftext === "" && (
         <Card className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label="user-avatar" className={classes.avatar}>
-                {post.data.author.charAt(0).toUpperCase()}
+                {post.author.charAt(0).toUpperCase()}
               </Avatar>
             }
             title={
               <Typography variant="caption" color="default">
-                {`${post.data.subreddit} • Posted by u/${post.data.author}`}
+                {`${post.subreddit} • Posted by u/${post.author}`}
               </Typography>
             }
             action={
@@ -73,7 +72,7 @@ const subredditCard = ({ classes, post }) => {
                 }}
               >
                 <ArrowUpward className={classes.voteIcon} />
-                {post.data.ups}
+                {post.ups}
                 <ArrowDownward className={classes.voteIcon} />
               </Typography>
             }
@@ -81,24 +80,24 @@ const subredditCard = ({ classes, post }) => {
           <CardActionArea>
             <a
               href={
-                !post.data.is_video
-                  ? post.data.url
-                  : post.data.media.reddit_video.fallback_url
+                !post.is_video
+                  ? post.url
+                  : post.media.reddit_video.fallback_url
               }
               className={classes.cardClick}
             >
               <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
-                  {post.data.title}
+                  {post.title}
                 </Typography>
               </CardContent>
 
               <CardMedia
                 className={classes.cardMedia}
                 image={
-                  isImage(post.data.url) ? post.data.url : post.data.thumbnail
+                  isImage(post.url) ? post.url : post.thumbnail
                 }
-                title={post.data.title}
+                title={post.title}
               />
             </a>
           </CardActionArea>
@@ -107,7 +106,7 @@ const subredditCard = ({ classes, post }) => {
               <ModeComment className={classes.commentIcon} />
             </IconButton>
             <Typography component="h5" variant="h5">
-              {post.data.num_comments} comments
+              {post.num_comments} comments
             </Typography>
             <IconButton>
               <Share />
