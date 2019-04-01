@@ -1,5 +1,8 @@
 import Layout from '../src/hoc/Layout/Layout';
 import RedditHome from '../src/components/RedditHome/RedditHome';
+import {Component} from 'react';
+import {serverRenderedPosts} from '../src/store/store';
+import { connect } from 'react-redux';
 
 
 const posts = [
@@ -85,14 +88,30 @@ const posts = [
   }
 ];
 
-const IndexPage = () => {
-  return (
-    <Layout>
-      <RedditHome
-        posts={posts}
-      />
-    </Layout>
-  );
+class IndexPage extends Component {
+
+  static getInitialProps ({ reduxStore, req }) {
+    reduxStore.dispatch(serverRenderedPosts(posts));
+    return {}
+  }
+
+
+  render() {
+    return (
+      <Layout>
+        <RedditHome
+          posts={this.props.posts}
+        />
+      </Layout>
+    );
+  }
+  
 }
 
-export default IndexPage;
+const mapStateToProps = state => {
+  return {
+    posts : state.posts
+  }
+}
+
+export default connect(mapStateToProps, null)(IndexPage);

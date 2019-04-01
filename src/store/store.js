@@ -1,73 +1,46 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunkMiddleware from "redux-thunk";
 
-const exampleInitialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0
-}
+const initialState = {
+  posts: [],
+  subreddits: []
+};
 
 export const actionTypes = {
-  TICK: 'TICK',
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET'
-}
+  SHOW_INITIAL_POSTS: "SHOW_INITIAL_POSTS",
+};
 
 // REDUCERS
-export const reducer = (state = exampleInitialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.TICK:
-      return Object.assign({}, state, {
-        lastUpdate: action.ts,
-        light: !!action.light
-      })
-    case actionTypes.INCREMENT:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      })
-    case actionTypes.DECREMENT:
-      return Object.assign({}, state, {
-        count: state.count - 1
-      })
+    case actionTypes.SHOW_INITIAL_POSTS:
+      return {
+        ...state,
+        posts: action.payload
+      };
     case actionTypes.RESET:
       return Object.assign({}, state, {
-        count: exampleInitialState.count
-      })
+        posts: initialState.posts
+      });
     default:
-      return state
+      return state;
   }
-}
+};
 
 // ACTIONS
-export const serverRenderClock = isServer => dispatch => {
-  return dispatch({ type: actionTypes.TICK, light: !isServer, ts: Date.now() })
-}
-
-export const startClock = dispatch => {
-  return setInterval(() => {
-    // Dispatch `TICK` every 1 second
-    dispatch({ type: actionTypes.TICK, light: true, ts: Date.now() })
-  }, 1000)
-}
-
-export const incrementCount = () => dispatch => {
-  return dispatch({ type: actionTypes.INCREMENT })
-}
-
-export const decrementCount = () => dispatch => {
-  return dispatch({ type: actionTypes.DECREMENT })
-}
+export const serverRenderedPosts = posts => dispatch => {
+  return dispatch({ type: actionTypes.SHOW_INITIAL_POSTS, payload: posts });
+};
 
 export const resetCount = () => dispatch => {
-  return dispatch({ type: actionTypes.RESET })
-}
+  return dispatch({ type: actionTypes.RESET });
+};
 
-export function initializeStore (initialState = exampleInitialState) {
+export function initializeStore(initialState = initialState) {
   return createStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
-  )
+  );
 }
