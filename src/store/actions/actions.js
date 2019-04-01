@@ -1,10 +1,12 @@
+import fetch from "isomorphic-fetch";
+
 import {
   SHOW_INITIAL_POSTS,
   REQUEST_POSTS,
   RECEIVE_POSTS,
 } from "./actionTypes";
-import fetch from "isomorphic-fetch";
-// ACTIONS
+
+
 export const serverRenderedPosts = posts => dispatch => {
   return dispatch({ type: SHOW_INITIAL_POSTS, payload: posts });
 };
@@ -20,21 +22,31 @@ export const receivePosts = (subreddit, json) => {
   return {
     type: RECEIVE_POSTS,
     subreddit,
-    posts: json.data && Array.isArray(json.data.children) ? json.data.children.map(child => child.data) : []
+    posts: json.data.children.length ? json.data.children.map(child => child.data) : []
   };
 };
 
 export const fetchPosts = subreddit => {
+  const defaultReposne = {
+    data: {
+      children: []
+    }
+  };
+
   return dispatch => {
     dispatch(requestPosts(subreddit));
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
+      .then(response => response.json())
+      .then(json => {
+        if(!json.error){
+          dispatch(receivePosts(subreddit, json))
+        } else {
+          dispatch(receivePosts(subreddit, defaultReposne));
         }
       })
-      .then(json => dispatch(receivePosts(subreddit, json)))
-      .catch(err => dispatch(receivePosts(subreddit, err)))
+      .catch(() => {
+        dispatch(receivePosts(subreddit, defaultReposne));
+      })
   };
 };
 

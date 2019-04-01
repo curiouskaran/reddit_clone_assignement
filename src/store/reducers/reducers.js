@@ -4,6 +4,7 @@ import {
   SHOW_INITIAL_POSTS,
 } from "../actions/actionTypes";
 
+
 const initialState = {
   posts: []
 };
@@ -32,8 +33,7 @@ const posts = (
   }
 };
 
-// REDUCERS
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_INITIAL_POSTS:
       return {
@@ -50,3 +50,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default reducer;

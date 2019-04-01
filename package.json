@@ -22,8 +22,6 @@
     "cross-env": "^5.2.0"
   },
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "next start -p %PORT%"
+    "dev": "node server.js"
   }
 }
