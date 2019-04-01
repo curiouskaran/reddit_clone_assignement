@@ -78,16 +78,6 @@ class SubredditPage extends Component {
       <Layout>
         <div className={classes.layout}>
           <SubredditHeader subreddit={subreddit} />
-          {/* {!posts[subreddit].isFetching ? (
-            posts[subreddit].items.map(post => <SubredditCard post={post} />)
-          ) : (
-            <h1>No content Found!!! for {subreddit}</h1>
-          )} */}
-          {/* {!posts.isFetching ? (
-            posts.items.map(post => <SubredditCard post={post} />)
-          ) : (
-            <h1>No content Found!!! for {subreddit}</h1>
-          )} */}
           {this.renderContent(posts, subreddit, classes)}
         </div>
       </Layout>
@@ -96,6 +86,7 @@ class SubredditPage extends Component {
 }
   
 const mapStateToProps = (state) => {
+  console.log("state inside subreddit is",state);
   return {
     posts: state
   }

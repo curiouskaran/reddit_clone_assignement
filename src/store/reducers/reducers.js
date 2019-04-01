@@ -2,39 +2,31 @@ import {
   RECEIVE_POSTS,
   REQUEST_POSTS,
   SHOW_INITIAL_POSTS,
-  INVALIDATE_SUBREDDIT
 } from "../actions/actionTypes";
 
 const initialState = {
-  posts: [],
-  postsBySubreddit: {}
+  posts: []
 };
 
 const posts = (
   state = {
     isFetching: false,
-    didInvalidate: false,
     items: []
   },
   action
 ) => {
   switch (action.type) {
-    case INVALIDATE_SUBREDDIT:
-      return Object.assign({}, state, {
-        didInvalidate: true
-      });
     case REQUEST_POSTS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true,
-        didInvalidate: false
-      });
+      };
     case RECEIVE_POSTS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
-        didInvalidate: false,
-        items: action.posts,
-        lastUpdated: action.receivedAt
-      });
+        items: action.posts
+      }
     default:
       return state;
   }
@@ -48,7 +40,6 @@ export default (state = initialState, action) => {
         ...state,
         posts: action.payload
       };
-    case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
       return {

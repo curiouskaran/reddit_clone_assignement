@@ -2,26 +2,11 @@ import {
   SHOW_INITIAL_POSTS,
   REQUEST_POSTS,
   RECEIVE_POSTS,
-  SELECT_SUBREDDIT
 } from "./actionTypes";
 import fetch from "isomorphic-fetch";
 // ACTIONS
 export const serverRenderedPosts = posts => dispatch => {
   return dispatch({ type: SHOW_INITIAL_POSTS, payload: posts });
-};
-
-export const selectSubreddit = (subreddit) => {
-  return {
-    type: SELECT_SUBREDDIT,
-    subreddit
-  }
-}
-
-export const invalidateSubreddit = subreddit => {
-  return {
-    type: INVALIDATE_SUBREDDIT,
-    subreddit
-  };
 };
 
 export const requestPosts = subreddit => {
@@ -35,8 +20,7 @@ export const receivePosts = (subreddit, json) => {
   return {
     type: RECEIVE_POSTS,
     subreddit,
-    posts: json.data && Array.isArray(json.data.children) ? json.data.children.map(child => child.data) : [],
-    receivedAt: Date.now()
+    posts: json.data && Array.isArray(json.data.children) ? json.data.children.map(child => child.data) : []
   };
 };
 
@@ -55,8 +39,8 @@ export const fetchPosts = subreddit => {
 };
 
 export const shouldFetchPosts = (state, subreddit) => {
-  const posts = state.postsBySubreddit[subreddit];
-  if (!posts) {
+  const posts = state[subreddit];
+  if (!posts || !posts.items.length) {
     return true;
   } else if (posts.isFetching) {
     return false;
