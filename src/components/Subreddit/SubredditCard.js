@@ -106,7 +106,7 @@ const subredditCard = ({ classes, post }) => {
             <IconButton>
               <ModeComment className={classes.commentIcon} />
             </IconButton>
-            <Typography component="caption" variant="h5">
+            <Typography component="h5" variant="h5">
               {post.data.num_comments} comments
             </Typography>
             <IconButton>

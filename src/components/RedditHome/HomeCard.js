@@ -94,7 +94,7 @@ const homeCard = ({ post, classes, index }) => (
         <IconButton>
           <ModeComment className={classes.commentIcon} />
         </IconButton>
-        <Typography component="caption" variant="h5">
+        <Typography component="h5" variant="h5">
           {2} comments
         </Typography>
         <IconButton>
