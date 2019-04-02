@@ -17,16 +17,11 @@ class SubredditPage extends Component {
     posts: {}
   };
 
-  static getInitialProps({ reduxStore, query }) {
-    reduxStore.dispatch(fetchPostsIfNeeded(query.id));
+  static async getInitialProps({ reduxStore, query }) {
+    await reduxStore.dispatch(fetchPostsIfNeeded(query.id));
     return {
       subreddit: query.id
     };
-  }
-
-  componentDidMount() {
-    const { dispatch, subreddit } = this.props;
-    dispatch(fetchPostsIfNeeded(subreddit));
   }
 
   render() {
