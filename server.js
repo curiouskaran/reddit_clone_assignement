@@ -1,6 +1,6 @@
 const express = require('express');
 const next = require('next');
-const cors = require('cors');
+// const cors = require('cors');
 
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -11,7 +11,7 @@ app
   .prepare()
   .then(() => {
     const server = express();
-    server.use(cors());
+    // server.use(cors());
     
     server.get('/r/:id', (req, res)=> {
       const actualPage = '/subreddit';
